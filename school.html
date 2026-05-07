@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VOC POOLANS</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#111,#1f1f1f);
+color:white;
+text-align:center;
+padding:30px;
+overflow-x:hidden;
+}
+
+h1{
+font-size:42px;
+color:#00ffd5;
+margin-bottom:10px;
+}
+
+p{
+margin-bottom:15px;
+color:#ccc;
+}
+
+.container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+margin-top:30px;
+}
+
+.card{
+background:#222;
+padding:20px;
+border-radius:15px;
+box-shadow:0 0 15px rgba(0,255,213,0.2);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-8px);
+box-shadow:0 0 25px rgba(0,255,213,0.5);
+}
+
+.card img{
+width:100px;
+height:100px;
+border-radius:50%;
+object-fit:cover;
+border:3px solid #00ffd5;
+margin-bottom:10px;
+}
+
+.card button,.memory-btn{
+padding:10px 15px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;
+background:#00ffd5;
+color:black;
+margin-top:10px;
+}
+
+.memory-btn{
+background:#ffcc00;
+margin:35px 0;
+font-size:18px;
+}
+
+.popup,.memory-popup,.image-viewer{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+justify-content:center;
+align-items:center;
+z-index:999;
+}
+
+.popup{
+background:rgba(0,0,0,0.85);
+}
+
+.memory-popup{
+background:rgba(0,0,0,0.94);
+padding:30px;
+overflow:hidden;
+}
+
+.image-viewer{
+background:rgba(0,0,0,0.95);
+z-index:2000;
+}
+
+.close,.close-btn,.img-close{
+position:absolute;
+top:15px;
+right:20px;
+font-size:35px;
+color:red;
+cursor:pointer;
+font-weight:bold;
+z-index:1500;
+}
+
+.id-card{
+background:white;
+color:black;
+padding:25px;
+width:330px;
+border-radius:15px;
+position:relative;
+animation:zoomIn .4s ease;
+}
+
+.id-card img{
+width:110px;
+height:110px;
+border-radius:50%;
+object-fit:cover;
+margin:10px 0;
+border:3px solid #00ffd5;
+}
+
+.id-card p{
+color:black;
+margin:8px 0;
+}
+
+.photo-wall{
+display:flex;
+flex-wrap:wrap;
+gap:25px;
+justify-content:center;
+margin-top:60px;
+height:82vh;
+overflow:auto;
+padding-bottom:40px;
+}
+
+.polaroid{
+background:white;
+padding:10px 10px 25px;
+width:190px;
+border-radius:5px;
+box-shadow:0 8px 18px rgba(0,0,0,0.5);
+transform:rotate(-4deg);
+transition:0.3s;
+cursor:pointer;
+z-index:10;
+}
+
+.polaroid:nth-child(even){
+transform:rotate(4deg);
+}
+
+.polaroid:hover{
+transform:scale(1.08) rotate(0deg);
+}
+
+.polaroid img{
+width:100%;
+height:150px;
+object-fit:cover;
+}
+
+.polaroid p{
+color:black;
+font-weight:bold;
+margin-top:8px;
+}
+
+.image-viewer img{
+max-width:92%;
+max-height:92%;
+border-radius:12px;
+box-shadow:0 0 25px white;
+animation:zoomIn .4s ease;
+}
+
+.heart{
+position:absolute;
+top:-50px;
+font-size:22px;
+pointer-events:none;
+z-index:5;
+animation:fallDown 4s linear forwards;
+}
+
+@keyframes fallDown{
+0%{transform:translateY(0);opacity:1;}
+100%{transform:translateY(120vh);opacity:0;}
+}
+
+@keyframes zoomIn{
+from{transform:scale(.6);opacity:0;}
+to{transform:scale(1);opacity:1;}
+}
+
+footer{
+margin-top:25px;
+color:#aaa;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🔥 12 A Gangsters 🔥</h1>
+<p>Once Stupids... now survivors 😂</p>
+
+<div class="container">
+
+<div class="card">
+<img src='images/aakash.jpg'>
+<h2>Aakash</h2>
+<p>ROLL NO : 01</p>
+<button onclick="showPopup('Aakash','Potta','Future Doctor','Always late  😎','images/aakash.jpg')">View ID</button>
+</div>
+<br>
+
+<div class="card">
+<img src="images/ajay.jpg">
+<h2>Ajay</h2>
+<p>ROLL NO : 02</p>
+<button onclick="showPopup('Ajay','Loduku','Engineer Loading','Phone edukadha guy 😂','images/ajay.jpg')">View ID</button>
+</div>
+<br>
+
+<div class="card">
+<img src="images/balaji.jpg">
+<h2>Balaji</h2>
+<p>ROLL NO : 03</p>
+<button onclick="showPopup('Balaji','School Boy','Engineer','Cricket Paithiyam 😎','images/balaji.jpg')">View ID</button>
+</div>
+<br>
+
+<div class="card">
+<img src="images/deepak.jpg">
+<h2>Deepak</h2>
+<p>ROLL NO : 05</p>
+<button onclick="showPopup('Deepak','C Y','Engineer','Ate everyone snacks 🍔','images/deepak.jpg')">View ID</button>
+</div>
+<br>
+
+<div class="card">
+<img src="images/diva.jpg">
+<h2>Divakar</h2>
+<p>ROLL NO : 06</p>
+<button onclick="showPopup('Divakar','Soothu Kumar','Pharmacist','Copied from all sides 😂','images/diva.jpg')">View ID</button>
+</div>
+<br>
+
+<div class="card">
+<img src="images/jai.jpg">
+<h2>Jai Prakash</h2>
+<p>ROLL NO : 07</p>
+<button onclick="showPopup('Jai Prakash','Hero','Engineer','copy JD body language 🔥','images/jai.jpg')">View ID</button>
+</div>
+<br>
+
+<div class="card">
+<img src="images/kannan.jpg">
+<h2>Kannan</h2>
+<p>ROLL NO : 08</p>
+<button onclick="showPopup('Kannan','Kadathal Kannan','Engineer','Kanja paiyan 😎','images/kannan.jpg')">View ID</button>
+</div>
+<br>
+
+<div class="card">
+<img src="images/nandha.jpg">
+<h2>Nandha</h2>
+<p>ROLL NO : 09</p>
+<button onclick="showPopup('Nandha','Nandy','Engineer','Gaaji 😄','images/nandha.jpg')">View ID</button>
+</div>
+<br>
+
+<div class="card">
+<img src="images/sarathi.jpg">
+<h2>Sarathi</h2>
+<p>ROLL NO : 14</p>
+<button onclick="showPopup('Sarathi','Sara paambu','Engineer','Vijay rasigar','images/sarathi.jpg')">View ID</button>
+</div>
+<br>
+
+<div class="card">
+<img src="images/vimal.jpg">
+<h2>Vimal Prasad</h2>
+<p>ROLL NO : 19</p>
+<button onclick="showPopup('Vimal Prasad','CBSE','Engineer','Batmiton paithiyam 😂','images/vimal.jpg')">View ID</button>
+</div>
+<br>
+
+<div class="card">
+<img src="images/vishal.jpg">
+<h2>Vishal</h2>
+<p>ROLL NO : 20</p>
+<button onclick="showPopup('Vishal','Boomer','AI Enthusiast','Fake id king 😎','images/vishal.jpg')">View ID</button>
+</div>
+<br>
+
+<div class="card">
+<img src="images/vishnu.jpg">
+<h2>Vishnu Prasad</h2>
+<p>ROLL NO : 21</p>
+<button onclick="showPopup('Vishnu Prasad','Karupu','Pharmacist','','images/vishnu.jpg')">View ID</button>
+</div>
+<br>
+
+<div class="card">
+<img src="images/yuvaraj.jpg">
+<h2>Yuvaraj</h2>
+<p>ROLL NO : 999</p>
+<button onclick="showPopup('Yuvaraj','Pakathu Class Bitch','Buisness Admin','Silent Roaster 😂','images/yuvaraj.jpg')">View ID</button>
+</div>
+<br>
+
+</div>
+
+<button class="memory-btn" onclick="showMemories()">SHOW MEMORIES 📸</button>
+
+<div class="popup" id="popup">
+<div class="id-card">
+<span class="close" onclick="closePopup()">✖</span>
+
+<h2>VOC VIDIYALAYAA SCHOOL</h2>
+<p>Student Identity Card</p>
+
+<img id="studentPhoto" src="">
+
+<p><b>NAME:</b> <span id="name"></span></p>
+<p><b>NICKNAME:</b> <span id="nick"></span></p>
+<p><b>STATUS:</b> <span id="status"></span></p>
+<p id="funny"></p>
+
+</div>
+</div>
+
+<div class="memory-popup" id="memoryPopup">
+<span class="close-btn" onclick="closeMemories()">✖</span>
+
+<h1>Our Nila Kaalam ✨</h1>
+
+<div class="photo-wall">
+<div class="polaroid"><img src=" images\wonderla.jpg" onclick="openImage(this.src)"><p>Wonderla🎡</p></div>
+<div class="polaroid"><img src=" images\sportsday.jpg" onclick="openImage(this.src)"><p>Sports Day⚽</p></div>
+<div class="polaroid"><img src=" images\whatsapp (5).jpg" onclick="openImage(this.src)"><p>Wayanad beach🏖️</p></div>
+<div class="polaroid"><img src=" images\12Apic.jpg" onclick="openImage(this.src)"><p>12A pic💖</p></div>
+<div class="polaroid"><img src=" images\atti.jpg" onclick="openImage(this.src)"><p>Atti🏘️</p></div>
+<div class="polaroid"><img src=" images\whatsapp.jpg" onclick="openImage(this.src)"><p>Poolans🔥</p></div>
+<div class="polaroid"><img src=" images\whatsapp (2).jpg" onclick="openImage(this.src)"><p>LastDay✨</p></div>
+<div class="polaroid"><img src=" images\wayanad.jpg" onclick="openImage(this.src)"><p>Woodland's🏨</p></div>
+<div class="polaroid"><img src=" images\year last.jpg" onclick="openImage(this.src)"><p>Year last🏏</p></div>
+<div class="polaroid"><img src=" images\class time.jpg" onclick="openImage(this.src)"><p>Class time🖋️</p></div>
+<div class="polaroid"><img src=" images\park.jpg" onclick="openImage(this.src)"><p>Park⛲</p></div>
+<div class="polaroid"><img src=" images\practicals.jpg" onclick="openImage(this.src)"><p>Practicals📏</p></div>
+<div class="polaroid"><img src=" images\narikootam.jpg" onclick="openImage(this.src)"><p>Narikootam🦊</p></div>
+<div class="polaroid"><img src=" images\grouppic.jpg" onclick="openImage(this.src)"><p>Random 😂</p></div>
+<div class="polaroid"><img src=" images\bdaypic.jpg" onclick="openImage(this.src)"><p>Bday movies🎥</p></div>
+<div class="polaroid"><img src=" images\gmeet.jpg" onclick="openImage(this.src)"><p>RainDay Gmeet🤝</p></div>
+<div class="polaroid"><img src=" images\bdaycelebration.jpg" onclick="openImage(this.src)"><p>Bday celebration🎂</p></div>
+<div class="polaroid"><img src=" images\whatsapp (3).jpg" onclick="openImage(this.src)"><p>Treat🍱</p></div>
+<div class="polaroid"><img src=" images\grouppic.jpg" onclick="openImage(this.src)"><p>Wayanad⛺</p></div>
+<div class="polaroid"><img src=" images\ennorebeach.jpg" onclick="openImage(this.src)"><p>Ennore beach🏖️</p></div>
+<div class="polaroid"><img src=" images\teashop.jpg" onclick="openImage(this.src)"><p>Teashop🍵</p></div>
+<div class="polaroid"><img src=" images\whatsapp (6).jpg" onclick="openImage(this.src)"><p>Boating🛶</p></div>
+<div class="polaroid"><img src=" images\5th group pic.jpg" onclick="openImage(this.src)"><p>5th Group pic📒</p></div>
+<div class="polaroid"><img src=" images\beach.jpg" onclick="openImage(this.src)"><p>Beach🏖️</p></div>
+
+</div>
+</div>
+
+<div class="image-viewer" id="imageViewer" onclick="closeImage()">
+<span class="img-close">✖</span>
+<img id="fullImage">
+</div>
+
+<audio id="memoryMusic" loop>
+<source src="music\3bgm.mpeg" type="audio/mpeg">
+</audio>
+
+<footer>
+<p>@all rights reserved by Deepak@2005</p>
+</footer>
+
+<script>
+let heartInterval;
+
+function showPopup(name,nick,status,funny,photo){
+document.getElementById("popup").style.display="flex";
+document.getElementById("name").innerText=name;
+document.getElementById("nick").innerText=nick;
+document.getElementById("status").innerText=status;
+document.getElementById("funny").innerText=funny;
+document.getElementById("studentPhoto").src=photo;
+}
+
+function closePopup(){
+document.getElementById("popup").style.display="none";
+}
+
+function showMemories(){
+document.getElementById("memoryPopup").style.display="block";
+
+let music=document.getElementById("memoryMusic");
+music.volume=0.25;
+music.play();
+
+heartRain();
+}
+
+function closeMemories(){
+document.getElementById("memoryPopup").style.display="none";
+
+let music=document.getElementById("memoryMusic");
+music.pause();
+music.currentTime=0;
+
+clearInterval(heartInterval);
+}
+
+function heartRain(){
+
+const popup=document.getElementById("memoryPopup");
+
+clearInterval(heartInterval);
+
+heartInterval=setInterval(()=>{
+
+let heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="❤️";
+heart.style.left=Math.random()*100+"%";
+
+popup.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},4000);
+
+},180);
+}
+
+function openImage(src){
+document.getElementById("imageViewer").style.display="flex";
+document.getElementById("fullImage").src=src;
+}
+
+function closeImage(){
+document.getElementById("imageViewer").style.display="none";
+}
+</script>
+
+</body>
+</html>
